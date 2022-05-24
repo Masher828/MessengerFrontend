@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import { changeUser } from "./redux/actions";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Routes,
+  Link,
+} from "react-router-dom";
+import Login from "./auth/login";
+import Register from "./auth/register";
+import Landing from "./landing";
 
 function App() {
+  const state = useSelector((state) => state.changeTheUser);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {state}
+      <button onClick={() => dispatch(changeUser("user102"))}>
+        Activate Lasers
+      </button>
+
+      <Router>
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="" element={<Landing />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
