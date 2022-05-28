@@ -1,7 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeUser } from "../redux/actions";
 
 const Login = () => {
+  const state = useSelector((state) => state.changeTheUser);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,6 +25,10 @@ const Login = () => {
 
   return (
     <div>
+      {state}
+      <button onClick={() => dispatch(changeUser("user102"))}>
+        Activate Lasers
+      </button>
       <form onSubmit={handleSubmit}>
         <label>Enter your email:</label>
         <input

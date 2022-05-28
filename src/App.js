@@ -1,5 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
-import { changeUser } from "./redux/actions";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,22 +8,16 @@ import {
 import Login from "./auth/login";
 import Register from "./auth/register";
 import Landing from "./landing";
+import Messenger from "./messenger";
 
 function App() {
-  const state = useSelector((state) => state.changeTheUser);
-  const dispatch = useDispatch();
-
   return (
     <div className="App">
-      {state}
-      <button onClick={() => dispatch(changeUser("user102"))}>
-        Activate Lasers
-      </button>
-
       <Router>
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="messenger" element={<Messenger />} />
           <Route path="" element={<Landing />} />
         </Routes>
       </Router>
