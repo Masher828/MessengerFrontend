@@ -1,9 +1,13 @@
 import React from "react";
 import { Grid, Avatar, Box } from "@mui/material";
+import "./chatStyle.css";
 
 const Conversation = () => {
   return (
-    <div style={{ width: "100%" }}>
+    <div
+      style={{ width: "100%", maxHeight: "70vh", overflowY: "scroll" }}
+      className="mainchatWindow"
+    >
       <Grid container style={{ marginTop: "1vh" }}>
         <Grid container style={{ width: "auto" }}>
           <Grid item>
@@ -49,7 +53,144 @@ const Conversation = () => {
           <Grid
             item
             style={{
-              backgroundColor: "#e9eff4",
+              backgroundColor: "#7541ea",
+              color: "white",
+              padding: "0.5vw",
+            }}
+            sx={{ borderRadius: "16px" }}
+          >
+            In publishing and graphic design, Lorem ipsum is a placeholder text
+            commonly used to demonstrate the visual form of a document or a
+            typeface without relying on meaningful content. Lorem ipsum may be
+            used as a placeholder before final copy is available.
+          </Grid>
+          <div style={{ textAlign: "right", paddingRight: "2%" }}>
+            <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
+          </div>
+        </Box>
+      </Grid>
+
+      <Grid
+        container
+        style={{
+          marginTop: "1vh",
+          justifyContent: "right",
+        }}
+      >
+        <Box
+          style={{
+            marginLeft: "1vw",
+            maxWidth: "60%",
+            justifyContent: "right",
+          }}
+        >
+          <Grid
+            item
+            style={{
+              backgroundColor: "#7541ea",
+              color: "white",
+              padding: "0.5vw",
+            }}
+            sx={{ borderRadius: "16px" }}
+          >
+            In publishing and graphic design, Lorem ipsum is a placeholder text
+            commonly used to demonstrate the visual form of a document or a
+            typeface without relying on meaningful content. Lorem ipsum may be
+            used as a placeholder before final copy is available.
+          </Grid>
+          <div style={{ textAlign: "right", paddingRight: "2%" }}>
+            <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
+          </div>
+        </Box>
+      </Grid>
+
+      <Grid
+        container
+        style={{
+          marginTop: "1vh",
+          justifyContent: "right",
+        }}
+      >
+        <Box
+          style={{
+            marginLeft: "1vw",
+            maxWidth: "60%",
+            justifyContent: "right",
+          }}
+        >
+          <Grid
+            item
+            style={{
+              backgroundColor: "#7541ea",
+              color: "white",
+              padding: "0.5vw",
+            }}
+            sx={{ borderRadius: "16px" }}
+          >
+            In publishing and graphic design, Lorem ipsum is a placeholder text
+            commonly used to demonstrate the visual form of a document or a
+            typeface without relying on meaningful content. Lorem ipsum may be
+            used as a placeholder before final copy is available.
+          </Grid>
+          <div style={{ textAlign: "right", paddingRight: "2%" }}>
+            <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
+          </div>
+        </Box>
+      </Grid>
+
+      <Grid
+        container
+        style={{
+          marginTop: "1vh",
+          justifyContent: "right",
+        }}
+      >
+        <Box
+          style={{
+            marginLeft: "1vw",
+            maxWidth: "60%",
+            justifyContent: "right",
+          }}
+        >
+          <Grid
+            item
+            style={{
+              backgroundColor: "#7541ea",
+              color: "white",
+              padding: "0.5vw",
+            }}
+            sx={{ borderRadius: "16px" }}
+          >
+            In publishing and graphic design, Lorem ipsum is a placeholder text
+            commonly used to demonstrate the visual form of a document or a
+            typeface without relying on meaningful content. Lorem ipsum may be
+            used as a placeholder before final copy is available.
+          </Grid>
+          <div style={{ textAlign: "right", paddingRight: "2%" }}>
+            <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
+          </div>
+        </Box>
+      </Grid>
+
+      <Grid
+        container
+        style={{
+          marginTop: "1vh",
+          justifyContent: "right",
+        }}
+      >
+        <Box
+          style={{
+            marginLeft: "1vw",
+            maxWidth: "60%",
+            justifyContent: "right",
+          }}
+        >
+          <Grid
+            item
+            style={{
+              backgroundColor: "#7541ea",
+              color: "white",
               padding: "0.5vw",
             }}
             sx={{ borderRadius: "16px" }}

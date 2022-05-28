@@ -1,9 +1,10 @@
 import React from "react";
-import { Grid, Avatar } from "@mui/material";
+import { Grid, Avatar, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Conversation from "./conversation";
 import { shadows } from "@mui/system";
+import { GrSend } from "react-icons/gr";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -36,11 +37,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ChatMid = () => {
   return (
-    <div style={{}}>
+    <div>
       <Grid
         container
         style={{
-          height: "auto",
+          height: "7vh",
           backgroundColor: "white",
           padding: "1%",
           marginTop: "1%",
@@ -71,7 +72,12 @@ const ChatMid = () => {
       </Grid>
       <Grid
         container
-        style={{ padding: "2%", backgroundColor: "white", marginTop: "1%" }}
+        style={{
+          padding: "2%",
+          backgroundColor: "white",
+          marginTop: "1%",
+          height: "75vh",
+        }}
         sx={{
           border: 1,
           borderRadius: "16px",
@@ -79,6 +85,22 @@ const ChatMid = () => {
         }}
       >
         <Conversation />
+      </Grid>
+      <Grid
+        container
+        style={{
+          padding: "2%",
+          backgroundColor: "white",
+          marginTop: "1%",
+          height: "7vh",
+        }}
+      >
+        <form>
+          <input type="text"></input>
+          <IconButton aria-label="delete">
+            <GrSend />
+          </IconButton>
+        </form>
       </Grid>
     </div>
   );

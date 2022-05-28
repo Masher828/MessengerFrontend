@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import ChatMid from "./chatmid";
+import ChatLeft from "./chatLeft";
 
 const Messenger = () => {
   return (
@@ -13,13 +14,15 @@ const Messenger = () => {
         <Grid
           item
           xs={3}
-          sx={{ borderRight: 1, borderColor: "#f9fbfc" }}
+          sx={{ borderRight: 1, borderColor: "white" }}
           style={{ backgroundColor: "#f8f8ff" }}
-        ></Grid>
+        >
+          <ChatLeft />
+        </Grid>
         <Grid
           item
           xs={7}
-          sx={{ borderRight: 1, borderColor: "#f9fbfc" }}
+          sx={{ borderRight: 1, borderColor: "white" }}
           style={{ backgroundColor: "#f8f8ff" }}
         >
           <ChatMid />
