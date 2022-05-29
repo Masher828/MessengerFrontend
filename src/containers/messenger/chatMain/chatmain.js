@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Avatar, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-import Conversation from "./conversation";
+import Chats from "./chats";
 import { shadows } from "@mui/system";
 import { GrSend } from "react-icons/gr";
 
@@ -35,7 +35,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ChatMid = () => {
+const ChatMain = () => {
   return (
     <div>
       <Grid
@@ -84,7 +84,7 @@ const ChatMid = () => {
           borderColor: "#f8f8ff",
         }}
       >
-        <Conversation />
+        <Chats />
       </Grid>
       <Grid
         container
@@ -106,4 +106,4 @@ const ChatMid = () => {
   );
 };
 
-export default ChatMid;
+export default ChatMain;

@@ -1,8 +1,10 @@
-import changeTheUser from "./updateUser";
 import { combineReducers } from "redux";
+import { authReducer } from "./authReducer";
+import { getConversations } from "./messengerReducer";
 
-const rootReducer = combineReducers({
-  changeTheUser,
+const reducers = combineReducers({
+  root_user: authReducer,
+  conversations: getConversations,
 });
 
-export default rootReducer;
+export default reducers;

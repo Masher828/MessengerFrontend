@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Avatar, Box } from "@mui/material";
 import "./chatStyle.css";
 
-const Conversation = () => {
+const Chats = () => {
   return (
     <div
       style={{ width: "100%", maxHeight: "70vh", overflowY: "scroll" }}
@@ -209,4 +209,4 @@ const Conversation = () => {
   );
 };
 
-export default Conversation;
+export default Chats;

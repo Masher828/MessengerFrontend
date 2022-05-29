@@ -1,7 +1,7 @@
 import React from "react";
-import { Grid, Avatar, IconButton, Box } from "@mui/material";
+import { Grid, Avatar, Button, Box } from "@mui/material";
 
-const ChatLeft = () => {
+const Conversation = () => {
   return (
     <div>
       <Grid container style={{ padding: "2%" }}>
@@ -93,10 +93,26 @@ const ChatLeft = () => {
               </Grid>
             </Box>
           </Grid>
+
+          <Grid
+            container
+            style={{
+              height: "7vh",
+              backgroundColor: "white",
+              padding: "2%",
+              marginTop: "1%",
+            }}
+            sx={{
+              border: 1,
+              borderRadius: "16px",
+              borderColor: "#f8f8ff",
+              boxShadow: 1,
+            }}
+          ></Grid>
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default ChatLeft;
+export default Conversation;
