@@ -9,3 +9,12 @@ export const getConversations = (state = conversations, action) => {
       return state;
   }
 };
+
+export const setConversationID = (state = "", action) => {
+  switch (action.type) {
+    case ActionTypes.SET_CONVERSATION_ID:
+      return action.payload;
+    default:
+      return state;
+  }
+};

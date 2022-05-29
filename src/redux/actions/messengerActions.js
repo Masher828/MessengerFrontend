@@ -13,3 +13,10 @@ export const getConversations = (accessToken) => {
     payload: accessToken,
   };
 };
+
+export const setConversationID = (ID) => {
+  return {
+    type: ActionTypes.SET_CONVERSATION_ID,
+    payload: ID,
+  };
+};
