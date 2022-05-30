@@ -32,8 +32,9 @@ const Conversation = () => {
     fetchConversations();
   }, []);
 
-  const updateConversationID = (id) => {
-    dispacth(setConversationID(id));
+  const updateConversationID = (id, name) => {
+    const data = { id: id, name: name };
+    dispacth(setConversationID(data));
   };
 
   const convo = conversations.map((convo) => {
@@ -54,7 +55,12 @@ const Conversation = () => {
           boxShadow: 1,
         }}
         key={convo.conversation[0].id}
-        onClick={() => updateConversationID(convo.conversation[0].id)}
+        onClick={() =>
+          updateConversationID(
+            convo.conversation[0].id,
+            convo.conversation[0].name
+          )
+        }
       >
         <Grid item>
           <Avatar

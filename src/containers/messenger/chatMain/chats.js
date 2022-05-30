@@ -19,7 +19,7 @@ const Chats = () => {
       const url =
         env.baseURL +
         "/messages/conversation/" +
-        conversationID +
+        conversationID.id +
         "/messages?offset=0&limit=100";
       const response = await axios
         .get(url, {
@@ -40,7 +40,7 @@ const Chats = () => {
   let renderedChats = "";
   if (chats != "") {
     renderedChats = chats.map((chat) => {
-      if (chat.userId == id) {
+      if (chat.userId != id) {
         return (
           <Grid
             container
@@ -48,6 +48,7 @@ const Chats = () => {
               marginTop: "1vh",
               justifyContent: "right",
             }}
+            key={chat.id}
           >
             <Box
               style={{
@@ -65,10 +66,7 @@ const Chats = () => {
                 }}
                 sx={{ borderRadius: "16px" }}
               >
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text commonly used to demonstrate the visual form of a document
-                or a typeface without relying on meaningful content. Lorem ipsum
-                may be used as a placeholder before final copy is available.
+                {chat.body}
               </Grid>
               <div style={{ textAlign: "right", paddingRight: "2%" }}>
                 <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
@@ -78,7 +76,7 @@ const Chats = () => {
         );
       } else {
         return (
-          <Grid container style={{ marginTop: "1vh" }}>
+          <Grid container style={{ marginTop: "1vh" }} key={chat.id}>
             <Grid container style={{ width: "auto" }}>
               <Grid item>
                 <Avatar
@@ -96,11 +94,7 @@ const Chats = () => {
                   }}
                   sx={{ borderRadius: "16px" }}
                 >
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text commonly used to demonstrate the visual form of a
-                  document or a typeface without relying on meaningful content.
-                  Lorem ipsum may be used as a placeholder before final copy is
-                  available.
+                  {chat.body}
                 </Grid>
                 <small style={{ marginLeft: "1%", color: "grey" }}>09:32</small>
               </Box>

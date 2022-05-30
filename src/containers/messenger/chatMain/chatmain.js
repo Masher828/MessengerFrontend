@@ -5,6 +5,7 @@ import Badge from "@mui/material/Badge";
 import Chats from "./chats";
 import { shadows } from "@mui/system";
 import { GrSend } from "react-icons/gr";
+import { useSelector } from "react-redux";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -36,6 +37,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const ChatMain = () => {
+  const conversationID = useSelector((state) => state.conversationID);
   return (
     <div>
       <Grid
@@ -67,7 +69,7 @@ const ChatMain = () => {
           </StyledBadge>
         </Grid>
         <Grid item xs={3} style={{ paddingLeft: "2%", color: "grey" }}>
-          <b> Will Smith</b>
+          <b> {conversationID.name}</b>
         </Grid>
       </Grid>
       <Grid
