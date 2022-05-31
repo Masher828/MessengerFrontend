@@ -39,6 +39,7 @@ const Chats = () => {
 
   let renderedChats = "";
   if (chats != "") {
+    console.log(chats);
     renderedChats = chats.map((chat) => {
       if (chat.userId != id) {
         return (

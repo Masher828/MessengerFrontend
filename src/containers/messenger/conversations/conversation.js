@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Avatar, Box } from "@mui/material";
+import { Grid, Avatar, Box, Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { env } from "../../../env_constains";
@@ -8,6 +8,7 @@ import {
   getConversations,
   setConversationID,
 } from "../../../redux/actions/messengerActions";
+import AddUserModal from "./adduserModal";
 
 const Conversation = () => {
   const conversations = useSelector((state) => state.conversations);
@@ -38,6 +39,7 @@ const Conversation = () => {
   };
 
   const convo = conversations.map((convo) => {
+    console.log("convo rendered");
     return (
       <Grid
         container
@@ -108,6 +110,7 @@ const Conversation = () => {
         </Grid>
         <Grid container>
           <h1> Chats</h1>
+          <AddUserModal fetchConvo={fetchConversations} />
         </Grid>
         <Grid container>{convo}</Grid>
       </Grid>
