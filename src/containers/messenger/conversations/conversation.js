@@ -39,7 +39,7 @@ const Conversation = () => {
   };
 
   const convo = conversations.map((convo) => {
-    console.log("convo rendered");
+    //console.log("convo rendered");
     return (
       <Grid
         container

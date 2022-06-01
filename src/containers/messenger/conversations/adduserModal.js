@@ -35,13 +35,10 @@ const AddUserModal = (props) => {
       Authorization: `Bearer ${token}`,
     };
     const data = {
-      conversation: {
-        name: "",
-        type: "PERSONAL",
-        description: "",
-        membersCount: 2,
-      },
-      users: [user.id, parseInt(usertoadd)],
+      name: "",
+      type: "PERSONAL",
+      description: "",
+      memberIds: [user.id, parseInt(usertoadd)],
     };
     console.log(data);
     const url = env.baseURL + "/messages/conversation";

@@ -1,45 +1,17 @@
 import React from "react";
 import { Grid, Avatar, Box } from "@mui/material";
 import "./chatStyle.css";
-import { env } from "../../../env_constains";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
+import { memo } from "react";
 
-const Chats = () => {
-  const conversationID = useSelector((state) => state.conversationID);
+const Chats = (props) => {
   const user = useSelector((state) => state.root_user);
-  const [chats, updateChats] = useState("");
   const id = user.id;
-
-  const fetchChats = async () => {
-    if (conversationID != "") {
-      const token = user.accessToken;
-      const url =
-        env.baseURL +
-        "/messages/conversation/" +
-        conversationID.id +
-        "/messages?offset=0&limit=100";
-      const response = await axios
-        .get(url, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
-          //console.log(response.data.data);
-          updateChats(response.data.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
-  useEffect(() => {
-    fetchChats();
-  }, [conversationID]);
-
+  //cc started
+  const chats = props.data;
   let renderedChats = "";
-  if (chats != "") {
-    console.log(chats);
+  if (chats != null && chats != "") {
+    // console.log(chats);
     renderedChats = chats.map((chat) => {
       if (chat.userId != id) {
         return (
@@ -116,4 +88,4 @@ const Chats = () => {
   );
 };
 
-export default Chats;
+export default memo(Chats);

@@ -6,6 +6,12 @@ import Chats from "./chats";
 import { shadows } from "@mui/system";
 import { GrSend } from "react-icons/gr";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { env } from "../../../env_constains";
+//import { useSelector } from "react-redux";
+//import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -37,7 +43,61 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const ChatMain = () => {
+  const [chatmsg, setChatmsg] = useState("");
   const conversationID = useSelector((state) => state.conversationID);
+  const user = useSelector((state) => state.root_user);
+  const [chats, updateChats] = useState("");
+  const id = user.id;
+
+  const fetchChats = async () => {
+    //console.log("api call was made");
+    if (conversationID != "") {
+      const token = user.accessToken;
+      const url =
+        env.baseURL +
+        "/messages/conversation/" +
+        conversationID.id +
+        "/messages?offset=0&limit=100";
+      const response = await axios
+        .get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log(response.data.data);
+          updateChats(response.data.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  useEffect(() => {
+    fetchChats();
+  }, [conversationID]);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const token = user.accessToken;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const data = {
+      conversationId: conversationID.id,
+      body: chatmsg,
+      type: "TEXT",
+    };
+    console.log(data);
+    const url = env.baseURL + "/messages/send";
+    const response = await axios
+      .post(url, data, {
+        headers: headers,
+      })
+      .then((response) => {
+        fetchChats();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <Grid
@@ -86,7 +146,7 @@ const ChatMain = () => {
           borderColor: "#f8f8ff",
         }}
       >
-        <Chats />
+        <Chats data={chats} />
       </Grid>
       <Grid
         container
@@ -97,9 +157,13 @@ const ChatMain = () => {
           height: "7vh",
         }}
       >
-        <form>
-          <input type="text"></input>
-          <IconButton aria-label="delete">
+        <form onSubmit={handleFormSubmit}>
+          <input
+            type="text"
+            value={chatmsg}
+            onChange={(e) => setChatmsg(e.target.value)}
+          ></input>
+          <IconButton type="submit">
             <GrSend />
           </IconButton>
         </form>
