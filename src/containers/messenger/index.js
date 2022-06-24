@@ -8,8 +8,14 @@ const Messenger = () => {
     <div>
       <Grid
         container
-        style={{ height: "7vh", backgroundColor: "white" }}
-      ></Grid>
+        style={{
+          height: "7vh",
+          backgroundColor: "white",
+          color: "black",
+        }}
+      >
+        <h2 style={{ marginLeft: "2%", marginTop: "0.5%" }}>Unis-Buzz</h2>
+      </Grid>
       <Grid container style={{ height: "93vh" }}>
         <Grid
           item
