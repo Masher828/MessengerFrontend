@@ -9,8 +9,42 @@ import {
   setConversationID,
 } from "../../../redux/actions/messengerActions";
 import AddUserModal from "./adduserModal";
+import { useState } from "react";
+
+const converStyle = {
+  height: "8vh",
+  backgroundColor: "white",
+  padding: "2%",
+  marginTop: "1%",
+  cursor: "pointer",
+};
+
+const converStylesx = {
+  border: 1,
+  borderRadius: "16px",
+  borderColor: "#f8f8ff",
+  boxShadow: 1,
+};
+
+const converStyleselected = {
+  height: "8vh",
+  backgroundColor: "#30323d",
+  color: "white",
+  padding: "2%",
+  marginTop: "1%",
+  cursor: "pointer",
+};
+
+const converStylesxselected = {
+  border: 1,
+  borderRadius: "16px",
+  borderColor: "#30323d",
+  boxShadow: 1,
+};
 
 const Conversation = () => {
+  const [selectedConvo, updateSelectedConvo] = useState("");
+
   const conversations = useSelector((state) => state.conversations);
   const user = useSelector((state) => state.root_user);
   const dispacth = useDispatch();
@@ -36,26 +70,25 @@ const Conversation = () => {
   const updateConversationID = (id, name) => {
     const data = { id: id, name: name };
     dispacth(setConversationID(data));
+    updateSelectedConvo(id);
   };
 
   const convo = conversations.map((convo) => {
-    //console.log("convo rendered");
+    console.log(convo);
+    let style = "";
+    let stylesx = "";
+    if (convo.conversation[0].id == selectedConvo) {
+      style = converStyleselected;
+      stylesx = converStylesxselected;
+    } else {
+      style = converStyle;
+      stylesx = converStylesx;
+    }
     return (
       <Grid
         container
-        style={{
-          height: "7vh",
-          backgroundColor: "white",
-          padding: "2%",
-          marginTop: "1%",
-          cursor: "pointer",
-        }}
-        sx={{
-          border: 1,
-          borderRadius: "16px",
-          borderColor: "#f8f8ff",
-          boxShadow: 1,
-        }}
+        style={style}
+        sx={stylesx}
         key={convo.conversation[0].id}
         onClick={() =>
           updateConversationID(
@@ -75,7 +108,7 @@ const Conversation = () => {
             <b>{convo.conversation[0].name}</b>
           </Grid>
           <Grid item style={{}}>
-            <small style={{ color: "grey" }}> How was the day?</small>
+            <small style={{ color: "grey" }}>How was the day?</small>
           </Grid>
         </Box>
       </Grid>

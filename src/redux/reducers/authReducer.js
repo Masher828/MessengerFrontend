@@ -1,7 +1,7 @@
 import { ActionTypes } from "../constants/actionTypes";
 const initailUser = {
   id: 1,
-  accessToken: "7db2dbd3-0cfa-4beb-acf4-8df480b42258",
+  accessToken: "19944167-c7d0-4af9-b61b-f1a32af2043c",
 };
 
 export const authReducer = (state = initailUser, action) => {
