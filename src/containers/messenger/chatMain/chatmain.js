@@ -63,7 +63,7 @@ const ChatMain = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
-          console.log(response.data.data);
+          //console.log(response.data.data);
           updateChats(response.data.data);
         })
         .catch((err) => console.log(err));
@@ -86,7 +86,7 @@ const ChatMain = () => {
       body: chatmsg,
       type: "TEXT",
     };
-    console.log(data);
+    //console.log(data);
     const url = env.baseURL + "/messages/send";
     const response = await axios
       .post(url, data, {

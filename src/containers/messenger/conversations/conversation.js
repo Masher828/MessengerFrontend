@@ -10,6 +10,9 @@ import {
 } from "../../../redux/actions/messengerActions";
 import AddUserModal from "./adduserModal";
 import { useState } from "react";
+import { BiLogOutCircle } from "react-icons/bi";
+import IconButton from "@mui/material/IconButton";
+import { setAuthUser } from "../../../redux/actions/messengerActions";
 
 const converStyle = {
   height: "8vh",
@@ -71,6 +74,10 @@ const Conversation = () => {
     const data = { id: id, name: name };
     dispacth(setConversationID(data));
     updateSelectedConvo(id);
+  };
+
+  const logout = () => {
+    dispacth(setAuthUser(-1, ""));
   };
 
   const convo = conversations.map((convo) => {
@@ -140,6 +147,14 @@ const Conversation = () => {
               sx={{ width: 30, height: 30 }}
             />
           </Grid>
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+            onClick={logout}
+          >
+            <BiLogOutCircle />
+          </IconButton>
         </Grid>
         <Grid container>
           <h1> Chats</h1>
