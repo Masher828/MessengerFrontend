@@ -74,7 +74,7 @@ const Conversation = () => {
   };
 
   const convo = conversations.map((convo) => {
-    console.log(convo);
+    //console.log(convo);
     let style = "";
     let stylesx = "";
     if (convo.conversation[0].id == selectedConvo) {

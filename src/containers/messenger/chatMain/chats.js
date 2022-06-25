@@ -13,7 +13,7 @@ const Chats = (props) => {
   if (chats != null && chats != "") {
     // console.log(chats);
     renderedChats = chats.map((chat) => {
-      if (chat.userId != id) {
+      if (chat.userId == id) {
         return (
           <Grid
             container
