@@ -12,12 +12,13 @@ import { env } from "../../env_constains";
 import { useNavigate } from "react-router-dom";
 import AppBar from "../Landing/appbar";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [isError, updateError] = useState(false);
   const [email, updateEmail] = useState("");
   const [password, updatePassword] = useState("");
-  const dispatch = useDispatch();
+  const [name, updateName] = useState("");
+  const [contact, updateContact] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -25,21 +26,18 @@ const Login = () => {
       "Content-Type": "application/json",
     };
     const data = {
+      name: name,
       email: email,
       password: password,
+      contact: contact,
     };
-    const url = env.baseURL + "/auth/user/signin";
+    const url = env.baseURL + "/auth/user/signup";
     const response = await axios
       .post(url, data, { headers: headers })
       .then((response) => {
-        dispatch(
-          setAuthUser(
-            response.data.userContext.id,
-            response.data.userContext.accessToken
-          )
-        );
+        console.log("Signed up");
         updateError(false);
-        navigate("/messenger");
+        navigate("/login");
       })
       .catch((err) => {
         updateError(true);
@@ -59,13 +57,13 @@ const Login = () => {
       <Box
         style={{
           position: "fixed",
-          top: "20%",
+          top: "15%",
           left: "25%",
           padding: "1%",
         }}
         sx={{
           width: "50vw",
-          height: "55vh",
+          height: "65vh",
           backgroundColor: "#36393f",
           boxShadow: "3",
           border: 1,
@@ -75,9 +73,10 @@ const Login = () => {
       >
         <Grid container style={{ height: "50vh" }}>
           <Grid item xs={8} style={{ textAlign: "center", color: "white" }}>
-            <h1>Welcome Back</h1>
+            <h1>Welcome to the Family</h1>
             <form onSubmit={submitHandler}>
               <TextField
+                required
                 sx={{ width: 1 }}
                 style={{ color: "white" }}
                 id="outlined-basic"
@@ -90,6 +89,33 @@ const Login = () => {
                 focused
               />
               <TextField
+                required
+                sx={{ width: 1 }}
+                style={{ color: "white", marginTop: "5%" }}
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                color="success"
+                type="text"
+                value={name}
+                onChange={(e) => updateName(e.target.value)}
+                focused
+              />
+              <TextField
+                required
+                sx={{ width: 1 }}
+                style={{ color: "white", marginTop: "5%" }}
+                id="outlined-basic"
+                label="Contact"
+                variant="outlined"
+                color="success"
+                type="number"
+                value={contact}
+                onChange={(e) => updateContact(e.target.value)}
+                focused
+              />
+              <TextField
+                required
                 sx={{ width: 1 }}
                 style={{ color: "white", marginTop: "5%" }}
                 id="outlined-basic"
@@ -109,11 +135,11 @@ const Login = () => {
                 style={{ marginTop: "2%" }}
                 type="submit"
               >
-                Login
+                Sign UP
               </Button>
               {isError ? (
                 <p style={{ marginTop: "2%", color: "red" }}>
-                  Invalid UserId/Password
+                  Issue while Signing up.
                 </p>
               ) : (
                 ""
@@ -129,4 +155,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

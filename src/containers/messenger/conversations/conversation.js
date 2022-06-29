@@ -13,6 +13,7 @@ import { useState } from "react";
 import { BiLogOutCircle } from "react-icons/bi";
 import IconButton from "@mui/material/IconButton";
 import { setAuthUser } from "../../../redux/actions/messengerActions";
+import { BroadcastChannel } from "broadcast-channel";
 
 const converStyle = {
   height: "8vh",
@@ -61,6 +62,7 @@ const Conversation = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        // console.log(response);
         dispacth(getConversations(response.data.conversation));
       })
       .catch((err) => console.log(err));
@@ -77,50 +79,57 @@ const Conversation = () => {
   };
 
   const logout = () => {
+    const channel = new BroadcastChannel("uniscast");
+    channel.postMessage("Logout proc");
     dispacth(setAuthUser(-1, ""));
   };
 
-  const convo = conversations.map((convo) => {
-    //console.log(convo);
-    let style = "";
-    let stylesx = "";
-    if (convo.conversation[0].id == selectedConvo) {
-      style = converStyleselected;
-      stylesx = converStylesxselected;
-    } else {
-      style = converStyle;
-      stylesx = converStylesx;
-    }
-    return (
-      <Grid
-        container
-        style={style}
-        sx={stylesx}
-        key={convo.conversation[0].id}
-        onClick={() =>
-          updateConversationID(
-            convo.conversation[0].id,
-            convo.conversation[0].name
-          )
-        }
-      >
-        <Grid item>
-          <Avatar
-            alt="profile"
-            src="https://assets.mycast.io/actor_images/actor-will-smith-79901_large.jpg?1586732333"
-          />
+  let convo = "";
+  if (conversations == null) {
+    convo = "";
+  } else {
+    convo = conversations.map((convo) => {
+      //console.log(convo);
+      let style = "";
+      let stylesx = "";
+      if (convo.conversation[0].id == selectedConvo) {
+        style = converStyleselected;
+        stylesx = converStylesxselected;
+      } else {
+        style = converStyle;
+        stylesx = converStylesx;
+      }
+      return (
+        <Grid
+          container
+          style={style}
+          sx={stylesx}
+          key={convo.conversation[0].id}
+          onClick={() =>
+            updateConversationID(
+              convo.conversation[0].id,
+              convo.conversation[0].name
+            )
+          }
+        >
+          <Grid item>
+            <Avatar
+              alt="profile"
+              src="https://assets.mycast.io/actor_images/actor-will-smith-79901_large.jpg?1586732333"
+            />
+          </Grid>
+          <Box style={{ marginLeft: "1vw", width: "auto" }}>
+            <Grid item style={{}}>
+              <b>{convo.name}</b>
+            </Grid>
+            <Grid item style={{}}>
+              <small style={{ color: "grey" }}>How was the day?</small>
+            </Grid>
+          </Box>
         </Grid>
-        <Box style={{ marginLeft: "1vw", width: "auto" }}>
-          <Grid item style={{}}>
-            <b>{convo.conversation[0].name}</b>
-          </Grid>
-          <Grid item style={{}}>
-            <small style={{ color: "grey" }}>How was the day?</small>
-          </Grid>
-        </Box>
-      </Grid>
-    );
-  });
+      );
+    });
+  }
 
   return (
     <div>

@@ -7,10 +7,22 @@ import {
   Link,
 } from "react-router-dom";
 import Login from "./containers/auth/login";
+import Signup from "./containers/auth/signup";
 import Landing from "./containers/Landing/index";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setAuthUser } from "./redux/actions/messengerActions";
+import { BroadcastChannel } from "broadcast-channel";
 
 function App() {
+  const dispacth = useDispatch();
+
+  const channel = new BroadcastChannel("uniscast");
+  channel.onmessage = (msg) => {
+    if (msg === "Logout proc") {
+      dispacth(setAuthUser(-1, ""));
+    }
+  };
+
   const user = useSelector((state) => state.root_user);
   const id = user.id;
   let Messengerelement = "";
@@ -24,6 +36,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="messenger" element={Messengerelement} />
           <Route path="" element={<Landing />} />
         </Routes>
