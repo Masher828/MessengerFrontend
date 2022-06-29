@@ -14,6 +14,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import IconButton from "@mui/material/IconButton";
 import { setAuthUser } from "../../../redux/actions/messengerActions";
 import { BroadcastChannel } from "broadcast-channel";
+import "./style.css";
 
 const converStyle = {
   height: "8vh",
@@ -169,7 +170,13 @@ const Conversation = () => {
           <h1> Chats</h1>
           <AddUserModal fetchConvo={fetchConversations} />
         </Grid>
-        <Grid container>{convo}</Grid>
+        <Grid
+          container
+          style={{ overflowY: "scroll", maxHeight: "70vh" }}
+          className="example"
+        >
+          {convo}
+        </Grid>
       </Grid>
     </div>
   );
