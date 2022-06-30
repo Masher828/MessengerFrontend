@@ -107,10 +107,7 @@ const Conversation = () => {
           sx={stylesx}
           key={convo.conversation[0].id}
           onClick={() =>
-            updateConversationID(
-              convo.conversation[0].id,
-              convo.conversation[0].name
-            )
+            updateConversationID(convo.conversation[0].id, convo.name)
           }
         >
           <Grid item>
