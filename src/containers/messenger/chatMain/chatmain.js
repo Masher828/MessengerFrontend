@@ -93,6 +93,7 @@ const ChatMain = () => {
         headers: headers,
       })
       .then((response) => {
+        setChatmsg("");
         fetchChats();
       })
       .catch((err) => console.log(err));

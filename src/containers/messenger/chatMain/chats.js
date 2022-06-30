@@ -19,7 +19,8 @@ const Chats = (props) => {
     renderedChats = chats
       .slice(0)
       .reverse()
-      .map((chat) => {
+      .map((chat, index, elements) => {
+        let next = elements[index + 1];
         let date = new Date(chat.sentOn * 1000);
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
@@ -29,14 +30,49 @@ const Chats = (props) => {
         const ts = hours + ":" + minutes;
         const datex = day + "-" + month + "-" + year;
         let renderdate = "";
-        let timechatsent = ts;
+        let timechatsent = (
+          <small style={{ marginLeft: "1%", color: "grey" }}>{ts}</small>
+        );
+        let linebreak = <br />;
         if (datex != prevdate) {
           prevdate = datex;
           renderdate = (
-            <Chip label={datex} key={datex} style={{ margin: "auto" }} />
+            <Chip
+              color="success"
+              label={datex}
+              key={datex}
+              style={{ margin: "auto" }}
+            />
           );
         }
-
+        if (next != undefined) {
+          let nextts = new Date(next.sentOn * 1000);
+          let currts = new Date(chat.sentOn * 1000);
+          let nexttsdata =
+            nextts.getDate() +
+            "-" +
+            nextts.getMonth() +
+            "-" +
+            nextts.getYear() +
+            "-" +
+            nextts.getHours() +
+            "-" +
+            nextts.getMinutes();
+          let currtsdata =
+            currts.getDate() +
+            "-" +
+            currts.getMonth() +
+            "-" +
+            currts.getYear() +
+            "-" +
+            currts.getHours() +
+            "-" +
+            currts.getMinutes();
+          if (next.userId == chat.userId && nexttsdata == currtsdata) {
+            timechatsent = "";
+            linebreak = "";
+          }
+        }
         if (chat.userId == id) {
           return (
             <div key={chat.id} style={{ textAlign: "center" }}>
@@ -62,18 +98,18 @@ const Chats = (props) => {
                       backgroundColor: "#7541ea",
                       color: "white",
                       padding: "0.5vw",
+                      minWidth: "5vw",
                     }}
                     sx={{ borderRadius: "16px" }}
                   >
                     {chat.body}
                   </Grid>
                   <div style={{ textAlign: "right", paddingRight: "2%" }}>
-                    <small style={{ marginLeft: "1%", color: "grey" }}>
-                      {timechatsent}
-                    </small>
+                    {timechatsent}
                   </div>
                 </Box>
               </Grid>
+              {linebreak}
             </div>
           );
         } else {
@@ -95,17 +131,18 @@ const Chats = (props) => {
                       style={{
                         backgroundColor: "#e9eff4",
                         padding: "0.5vw",
+                        minWidth: "5vw",
                       }}
                       sx={{ borderRadius: "16px" }}
                     >
                       {chat.body}
                     </Grid>
-                    <small style={{ marginLeft: "1%", color: "grey" }}>
-                      {timechatsent}
-                    </small>
+
+                    {timechatsent}
                   </Box>
                 </Grid>
               </Grid>
+              {linebreak}
             </div>
           );
         }
