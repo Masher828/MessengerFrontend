@@ -5,8 +5,10 @@ import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTo
 import ModalComponent from "./modal";
 import React from "react";
 import { Grid } from "@mui/material";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArchiveIcon from "@mui/icons-material/Archive";
+import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useWindowSize from "../customhooks/screensizehook";
 
@@ -62,12 +64,11 @@ const UserHeaderComponent = ({
         </>
       ) : (
         <>
-          <IconButton
-            aria-label="delete"
-            size="large"
-            onClick={() => setOpenModal(true)}>
-            <ArchiveIcon sx={{ fontSize: 30 }} />
-          </IconButton>
+          <Checkbox
+            {...label}
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+          />
           <IconButton
             aria-label="delete"
             size="large"
