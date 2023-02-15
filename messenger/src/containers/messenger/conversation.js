@@ -5,18 +5,19 @@ import CssBaseline from "@mui/material/CssBaseline";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import RestoreIcon from "@mui/icons-material/Restore";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
-import useWindowSize from "../customhooks/screensizehook";
-import ListItemComponent from "../components/list_item";
+import useWindowSize from "../../customhooks/screensizehook";
+import ListItemComponent from "../../components/list_item";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Grid } from "@mui/material";
-import UserHeaderComponent from "../components/user_header";
+import UserHeaderComponent from "../../components/user_header";
 
 function refreshMessages() {
   const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
@@ -128,9 +129,10 @@ export default function ConversationScreen({ chatScreenToggle }) {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}>
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+            <BottomNavigationAction label="Add Friends" icon={<PersonAddIcon />} />
         </BottomNavigation>
       </Paper>
     </Box>

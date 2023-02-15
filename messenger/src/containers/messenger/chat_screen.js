@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import useWindowSize from "../customhooks/screensizehook";
-import UserHeaderComponent from "../components/user_header";
+import useWindowSize from "../../customhooks/screensizehook";
+import UserHeaderComponent from "../../components/user_header";
 import SentimentSatisfiedSharpIcon from "@mui/icons-material/SentimentSatisfiedSharp";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";

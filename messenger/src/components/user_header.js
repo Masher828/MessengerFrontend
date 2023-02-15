@@ -65,7 +65,7 @@ const UserHeaderComponent = ({
       ) : (
         <>
           <Checkbox
-            {...label}
+            H
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
           />

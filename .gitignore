@@ -11,8 +11,9 @@ logs
 node_modules
 bower_components
 
+build
 *.sublime*
-
+*.idea
 psd
 thumb
 sketch
