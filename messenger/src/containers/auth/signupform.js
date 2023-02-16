@@ -84,6 +84,10 @@ const SignUpForm = ({setCurrentPage}) => {
             formValue.confirmPassword.length === 0 ||
             formValue.firstName.length === 0
         ) {
+            formValue.name = formValue.firstName
+            if (formValue.lastName.length > 0) {
+                formValue.name += " " +formValue.lastName
+            }
             dispatch(Signup(formValue));
         } else {
             return;

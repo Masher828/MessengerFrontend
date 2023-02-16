@@ -1,7 +1,7 @@
 import * as ActionConstants from "./action_constants"
 import axios from "axios";
 
-const url = "http://localhost:8081/";
+const url = "http://localhost:8082/";
 
 const getConversationRequest = () => {
     return {
@@ -26,8 +26,10 @@ const getConversationFailure = (err) => {
 export const GetConversations = (query) => dispatch => {
     dispatch(getConversationRequest())
 
+    const header = { headers: {"Authorization" : `Bearer ${localStorage.getItem("sessionToken")}`} }
+
     axios
-        .get(url + "messenger/conversations?"+query)
+        .get(url + "messenger/conversations?"+query, header)
         .then((resp) => {
             if (resp != null && resp.data != null) {
                 dispatch(getConversationSuccess(resp.data));
@@ -36,7 +38,6 @@ export const GetConversations = (query) => dispatch => {
             }
         })
         .catch((err) => {
-            console.log(err);
             dispatch(getConversationFailure(err?.response?.data?.err));
         });
 }
@@ -64,11 +65,12 @@ const getMessageInConversationFailure = (err) => {
 export const GetMessagesInConversation = (conversationId) => dispatch => {
     dispatch(getMessagesInConversationRequest())
 
+    const header = { headers: {"Authorization" : `Bearer ${localStorage.getItem("sessionToken")}`} }
     axios
-        .get(url + "messenger/"+ conversationId +"/messages/list")
+        .get(url + "messenger/"+ conversationId +"/messages/list", header)
         .then((resp) => {
             if (resp != null && resp.data != null) {
-                dispatch(getMessagesInConversationSuccess(resp.data));
+                dispatch(getMessagesInConversationSuccess(resp.data?.data));
             } else {
                 dispatch(getMessageInConversationFailure({}));
             }
@@ -102,8 +104,9 @@ const getMessagesWithFriendFailure = (err) => {
 export const GetMessagesWithFriend = (friendId) => dispatch => {
     dispatch(getMessagesWithFriendRequest())
 
+    const header = { headers: {"Authorization" : `Bearer ${localStorage.getItem("sessionToken")}`} }
     axios
-        .get(url + "messenger/"+ friendId +"/messages/list")
+        .get(url + "messenger/"+ friendId +"/messages/list", header)
         .then((resp) => {
             if (resp != null && resp.data != null) {
                 dispatch(getMessagesWithFriendSuccess(resp.data));
@@ -114,5 +117,44 @@ export const GetMessagesWithFriend = (friendId) => dispatch => {
         .catch((err) => {
             console.log(err);
             dispatch(getMessagesWithFriendFailure(err?.response?.data?.err));
+        });
+}
+
+const sendMessageRequest = () => {
+    return {
+        type : ActionConstants.SEND_MESSAGE_REQUEST
+    }
+}
+
+const sendMessageSuccess = (data) => {
+    return {
+        type : ActionConstants.SEND_MESSAGE_SUCCESS,
+        data : data
+    }
+}
+
+const sendMessageFailure = (err) => {
+    return {
+        type : ActionConstants.SEND_MESSAGE_FAILURE,
+        err : err
+    }
+}
+
+export const SendMessage = (body) => dispatch => {
+    dispatch(sendMessageRequest())
+
+    const header = { headers: {"Authorization" : `Bearer ${localStorage.getItem("sessionToken")}`} }
+    axios
+        .post(url + "messenger/messages/send", body, header)
+        .then((resp) => {
+            if (resp != null && resp.data != null) {
+                dispatch(sendMessageSuccess(resp.data));
+            } else {
+                dispatch(sendMessageFailure({}));
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch(sendMessageFailure(err?.response?.data?.err));
         });
 }

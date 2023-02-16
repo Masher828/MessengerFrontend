@@ -64,7 +64,6 @@ const SignupRequestFailure = (err) => {
 export const Signup = (payload) => (dispatch) => {
   dispatch(SignupRequest);
 
-  console.log(payload)
   axios
     .post(url + "auth/signup", payload)
     .then((resp) => {
@@ -78,3 +77,41 @@ export const Signup = (payload) => (dispatch) => {
       dispatch(SignupRequestFailure(err.response.data.err));
     });
 };
+
+const getLoggedInUserRequest = () => {
+  return {
+    type : ActionConstants.GET_LOGGEDIN_USER_REQUEST
+  }
+}
+
+const getLoggedInUserSuccess = (data) => {
+  return {
+    type : ActionConstants.GET_LOGGEDIN_USER_SUCCESS,
+    data : data
+  }
+}
+
+const getLoggedInUserFailure = (err) => {
+  return {
+    type : ActionConstants.GET_LOGGEDIN_USER_FAILURE,
+    err : err
+  }
+}
+
+export const GetLoggedInUserinfo = () => (dispatch) => {
+  dispatch(getLoggedInUserRequest())
+  const header = { headers: {"Authorization" : `Bearer ${localStorage.getItem("sessionToken")}`} }
+
+  axios
+      .get(url + "auth/profile", header)
+      .then((resp) => {
+        if (resp != null) {
+          dispatch(getLoggedInUserSuccess(resp.data));
+        } else {
+          dispatch(getLoggedInUserFailure({}));
+        }
+      })
+      .catch((err) => {
+        dispatch(getLoggedInUserFailure(err?.response?.data?.err));
+      });
+}

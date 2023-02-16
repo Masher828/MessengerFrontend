@@ -46,7 +46,6 @@ const SignInForm = ({ setCurrentPage }) => {
 
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
-    console.log(e.target.name);
     if (e.target.name === "emailId") {
       if (!IsEmailValid(e.target.value)) {
         setFormErrorValue({
