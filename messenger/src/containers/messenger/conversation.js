@@ -18,6 +18,9 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Grid } from "@mui/material";
 import UserHeaderComponent from "../../components/user_header";
+import ModalComponent from "../../components/modal";
+import SearchUserModal from "../../components/search_user";
+import {useState} from "react";
 
 function refreshMessages() {
   const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
@@ -29,6 +32,7 @@ function refreshMessages() {
 
 export default function ConversationScreen({ chatScreenToggle }) {
   const windowSize = useWindowSize();
+  const [openUserSearchModal, setOpenUserSearchModal] = useState(false)
   const [value, setValue] = React.useState(0);
   const [bottomNavWidth, setBottomNavWidth] = React.useState(0);
   const ref = React.useRef(null);
@@ -127,11 +131,17 @@ export default function ConversationScreen({ chatScreenToggle }) {
           showLabels
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+              console.log(newValue)
+              if (newValue === 4) {
+                  setOpenUserSearchModal(true)
+              } else {
+                  setValue(newValue);
+              }
           }}>
             <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
             <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
             <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+            <SearchUserModal openModal={openUserSearchModal} setOpenModal={setOpenUserSearchModal} />
             <BottomNavigationAction label="Add Friends" icon={<PersonAddIcon />} />
         </BottomNavigation>
       </Paper>
