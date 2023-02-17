@@ -8,7 +8,7 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import {useDispatch, useSelector} from "react-redux";
 import {ConversationTypeOne2One} from "../../utils/utils";
-import {SendMessage} from "../../redux/messenger/action_creator";
+import {GetConversations, SendMessage} from "../../redux/messenger/action_creator";
 
 const ChatScreen = ({setChatScreenToggle}) => {
     const windowSize = useWindowSize();
@@ -35,6 +35,9 @@ const ChatScreen = ({setChatScreenToggle}) => {
             messageType:"text"
         }
         dispatch(SendMessage(data))
+        setTimeout(()=>{
+            dispatch(GetConversations())
+        }, 300)
         setMessageBody("")
     }
     return (

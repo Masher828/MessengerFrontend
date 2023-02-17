@@ -63,7 +63,6 @@ export default function ConversationScreen({chatScreenToggle}) {
         chatScreenToggle(true)
     }
 
-    console.log(messengerStore)
     return (
         <Box
             sx={{pb: 7, pt: 7, maxHeight: windowSize.height, overflowY: "auto"}}
@@ -94,7 +93,7 @@ export default function ConversationScreen({chatScreenToggle}) {
 
             {/* ConversationList */}
             <List>
-                {messengerStore.conversations.map((message, index) => (
+                {messengerStore.conversations?.map((message, index) => (
                     <ListItemComponent
                         key = {message.id}
                         onClicking={(index)=>handleConversationClick(message.id, index)}

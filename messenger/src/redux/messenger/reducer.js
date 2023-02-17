@@ -1,6 +1,6 @@
 import * as ActionConstants from "./action_constants"
 
-const initState = {isConversationLoading: false, isMessagesLoading: false, conversations: [], messages: [], error: null, openedConversation :{}}
+const initState = {isConversationLoading: false, isMessagesLoading: false, conversations: [], messages: [], error: null, openedConversation :null}
 
 
 const MessengerReducer = (state = initState, action) => {

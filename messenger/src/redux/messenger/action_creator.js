@@ -110,6 +110,7 @@ export const GetConversationWithFriend = (friendId) => dispatch => {
         .then((resp) => {
             if (resp != null && resp.data != null) {
                 dispatch(getConversationWithFriendSuccess(resp.data));
+                dispatch(GetMessagesInConversation(resp?.data?.data?.id))
             } else {
                 dispatch(getConversationWithFriendFailure({}));
             }

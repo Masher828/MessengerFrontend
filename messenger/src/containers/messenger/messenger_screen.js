@@ -14,6 +14,7 @@ const MessengerScreenContainer = () => {
     const navigate = useNavigate()
     const [chatScreenToggle, setChatScreenToggle] = React.useState(0);
     const authStore = useSelector(state => state.auth)
+    const messagesStore = useSelector(state => state.messenger)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -38,7 +39,7 @@ const MessengerScreenContainer = () => {
                     </Grid>
                 ) : null}
 
-                {size.width > 900 || chatScreenToggle ? (
+                {(size.width > 900 || chatScreenToggle) && messagesStore.openedConversation ? (
                     <Grid item xs={12} md={8} lg={9}>
                         <ChatScreen setChatScreenToggle={setChatScreenToggle} />
                     </Grid>
