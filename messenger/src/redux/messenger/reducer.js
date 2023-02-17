@@ -1,6 +1,6 @@
 import * as ActionConstants from "./action_constants"
 
-const initState = {isConversationLoading: false, isMessagesLoading: false, conversations: [], messages: [], error: null}
+const initState = {isConversationLoading: false, isMessagesLoading: false, conversations: [], messages: [], error: null, openedConversation :{}}
 
 
 const MessengerReducer = (state = initState, action) => {
@@ -14,13 +14,17 @@ const MessengerReducer = (state = initState, action) => {
         case ActionConstants.GET_CONVERSATION_FAILURE:
             return {...state, isConversationLoading: false, error: action.err};
 
-        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_REQUEST || ActionConstants.GET_MESSAGES_WITH_FRIEND_REQUEST:
+        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_REQUEST :
             return {...state, isMessagesLoading: true, error: null};
 
-        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_SUCCESS || ActionConstants.GET_MESSAGES_WITH_FRIEND_SUCCESS:
+        // case ActionConstants.GET_CONVERSATION_WITH_FRIEND_SUCCESS:
+        //     return {...state, isMessagesLoading: false, messages: action?.data?.data ? action.data.data : []};
+
+        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_SUCCESS :
+
             return {...state, isMessagesLoading: false, messages: action.data};
 
-        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_FAILURE || ActionConstants.GET_MESSAGES_WITH_FRIEND_FAILURE:
+        case ActionConstants.GET_MESSAGES_IN_CONVERSATION_FAILURE || ActionConstants.GET_CONVERSATION_WITH_FRIEND_FAILURE:
             return {...state, isMessagesLoading: false, error: action.err};
 
         case ActionConstants.SEND_MESSAGE_REQUEST:
@@ -31,6 +35,25 @@ const MessengerReducer = (state = initState, action) => {
 
         case ActionConstants.SEND_MESSAGE_FAILURE:
             return {...state, isMessagesLoading: false, error: action.err}
+
+        case ActionConstants.OPEN_CONVERSATION_REQUEST :
+            return {...state, isMessagesLoading: true, error: null}
+
+        case ActionConstants.GET_CONVERSATION_WITH_FRIEND_REQUEST:
+            return {...state, isMessagesLoading: true, error: null}
+
+        case ActionConstants.OPEN_CONVERSATION_SUCCESS :
+            return {...state, openedConversation: action?.data?.data, isMessagesLoading: false}
+
+        case ActionConstants.GET_CONVERSATION_WITH_FRIEND_SUCCESS:
+            return {...state, openedConversation: action?.data?.data, isMessagesLoading: false}
+
+        case ActionConstants.GET_CONVERSATION_WITH_FRIEND_FAILURE:
+            return {...state, isMessagesLoading: false, error: action?.err}
+
+        case ActionConstants.OPEN_CONVERSATION_FAILURE :
+            return {...state, isMessagesLoading: false, error: action?.err}
+
         default:
             return state;
     }

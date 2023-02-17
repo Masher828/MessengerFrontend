@@ -10,18 +10,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {ConversationTypeOne2One} from "../../utils/utils";
 import {SendMessage} from "../../redux/messenger/action_creator";
 
-const ChatScreen = ({setChatScreenToggle, index}) => {
+const ChatScreen = ({setChatScreenToggle}) => {
     const windowSize = useWindowSize();
     const [bottomNavWidth, setBottomNavWidth] = React.useState(0);
     const authStore = useSelector(state => state.auth)
     const messageState = useSelector((state) => state.messenger)
     const [messageBody, setMessageBody] = React.useState("")
     const dispatch = useDispatch()
-    if (index === -1) {
-        index = 0
-    } else {
-        index -= 1
-    }
 
     React.useEffect(() => {
         if (windowSize.width > 1200) {
@@ -36,7 +31,7 @@ const ChatScreen = ({setChatScreenToggle, index}) => {
     const handleSendMessage = () => {
         var data = {
             body : messageBody,
-            conversationId : messageState.conversations[index]?.id,
+            conversationId : messageState.openedConversation?.id,
             messageType:"text"
         }
         dispatch(SendMessage(data))
@@ -47,7 +42,7 @@ const ChatScreen = ({setChatScreenToggle, index}) => {
             sx={{pb: 7, pt: 10, maxHeight: windowSize.height, overflowY: "auto"}}>
             <CssBaseline/>
             <Grid container sx={{float: "left"}}>
-                {messageState.messages.map((message, index) => (
+                {messageState?.messages?.map((message, index) => (
                     <Grid item xs={12} sx={{textAlign: "left"}} key={message.id}>
                         {authStore.userDetails.id !== message.senderId ? (
                             <Paper
@@ -89,7 +84,7 @@ const ChatScreen = ({setChatScreenToggle, index}) => {
                 }}
                 elevation={3}>
                 <UserHeaderComponent
-                    primary={messageState.conversations[index]?.conversationType === ConversationTypeOne2One ? messageState.conversations[index]?.participantsName[0] === authStore.userDetails.name ? messageState.conversations[index]?.participantsName[1] : messageState.conversations[index]?.participantsName[0] : messageState.conversations[index]?.name}
+                    primary={messageState.openedConversation?.conversationType === ConversationTypeOne2One ? messageState.openedConversation?.participantsName[0] === authStore.userDetails.name ? messageState.openedConversation?.participantsName[1] : messageState.openedConversation?.participantsName[0] : messageState.openedConversation?.name}
                     avatarHeight={56}
                     avatarWidth={56}
                     avatarMarginLeft={2}

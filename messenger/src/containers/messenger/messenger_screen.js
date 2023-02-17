@@ -12,7 +12,7 @@ import {GetLoggedInUserinfo} from "../../redux/auth/action_creator";
 const MessengerScreenContainer = () => {
     const size = useWindowSize();
     const navigate = useNavigate()
-    const [chatScreenToggle, setChatScreenToggle] = React.useState(-1);
+    const [chatScreenToggle, setChatScreenToggle] = React.useState(0);
     const authStore = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
@@ -38,9 +38,9 @@ const MessengerScreenContainer = () => {
                     </Grid>
                 ) : null}
 
-                {size.width > 900 || chatScreenToggle !== -1 ? (
+                {size.width > 900 || chatScreenToggle ? (
                     <Grid item xs={12} md={8} lg={9}>
-                        <ChatScreen setChatScreenToggle={setChatScreenToggle} index={chatScreenToggle}/>
+                        <ChatScreen setChatScreenToggle={setChatScreenToggle} />
                     </Grid>
                 ) : null}
             </Grid>
