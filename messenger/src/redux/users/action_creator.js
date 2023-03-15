@@ -1,7 +1,7 @@
 import * as ActionConstants from "./action_constants"
 import axios from "axios";
 
-const url = "http://localhost:8083/";
+const url = "http://localhost:8085/";
 
 const searchFriendRequest = () => {
     return {
