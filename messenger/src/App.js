@@ -7,8 +7,9 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import ResetPassword from "./containers/auth/resetpassword";
 import SignUpForm from "./containers/auth/signupform";
 import SignInForm from "./containers/auth/signinform";
-import { Provider } from "react-redux";
-import store from "./redux/reducer";
+import { useDispatch, useSelector } from "react-redux";
+
+import { GetConversations, GetMessagesInConversation } from "./redux/messenger/action_creator";
 
 function App() {
 
@@ -17,8 +18,18 @@ function App() {
     const [payload, setPayload] = useState({});
     const [connectStatus, setConnectStatus] = useState('Connect');
 
+    const dispatch = useDispatch();
+    const messagesStore = useSelector(state => state.messenger)
+
     useEffect(()=>{
         console.log(payload)
+        if (payload.actionId === "MessageUpdate") {
+            dispatch(GetConversations())
+            console.log(payload.conversationId === messagesStore.openedConversation?.id)
+            if (payload.conversationId === messagesStore.openedConversation?.id) {
+                dispatch(GetMessagesInConversation(messagesStore.openedConversation?.id))
+            }
+        }
     }, [payload])
     
     
@@ -135,9 +146,9 @@ function App() {
     ]);
     
     return (
-        <Provider store={store}>
-            <RouterProvider router={router} />
-        </Provider>)
+       
+            <RouterProvider router={router} />)
+       
 }
 
 export default App;

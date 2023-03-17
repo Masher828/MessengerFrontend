@@ -108,10 +108,19 @@ const ChatScreen = ({setChatScreenToggle}) => {
                 }}
                 elevation={5}>
                 <OutlinedInput
+                    multiline
+                    maxRows={3}
                     placeholder="Type Message ..."
                     id="outlined-adornment-password"
                     type={"text"}
                     value={messageBody}
+                    onKeyDown={(e)=>{
+                        console.log(e)
+                        if (e.code === "Enter" && !e.shiftKey) {
+                            handleSendMessage()
+                          
+                        }
+                    }}
                     onChange={(e) => {
                         setMessageBody(e.target.value)
                     }
